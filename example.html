@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dialog X</title>
+	<link rel="stylesheet" type="text/css" href="dialogX.css">
+</head>
+<body>
+
+<button onclick="dialogX.password({
+		message: 'Verify your password?<br>Correct password is <b>000</b>.',
+		buttonText: 'Verify', 
+		title:false
+	}, function (e) {
+		if (e.value == '000') {
+			e.close();
+		} else {
+			e.malformed();
+		}
+	})">Verify Password</button>
+
+	<button onclick="dialogX.alert({
+		message: 'JavaScript is the <i>programming language</i> of <b>HTML</b> and the Web.',
+		buttonText: 'Got It!', 
+		title:'Info'
+		})">Alert</button>
+
+	<button onclick="dialogX.confirm({
+		message: 'What is your age group?',
+		buttons: 3,
+		buttonText: ['13+', '21+', '60+'], 
+		title:false
+		}, function (i) {
+			var clicked = '13+';
+			switch (i) {
+				case 1:
+				clicked = '21+';
+				break;
+				case 2:
+				clicked = '60+';
+				break;
+			}
+			dialogX.alert({
+				message: 'Your <i>age group</i> is <b>'+clicked+'</b>.',
+				buttonText: 'OK', 
+				title:'Info'
+			});
+		})">Confirm</button>
+
+		<button onclick="prompt()">Prompt</button>
+
+		<button onclick="dialogX.custom()">Custom</button>
+
+<script src="dialogX.js"></script>
+<script type="text/javascript">
+function prompt() {
+
+	dialogX.alert({
+		message: 'We are sorry. Currently <i>prompt</i> is under <b>development</b>.',
+		buttonText: 'OK', 
+		title:'Info'
+		});
+
+
+}	
+
+
+dialogX.custom = function () {
+
+	var instance = this; 
+
+   var message = document.createElement('div');
+   message.className = 'dialogX-custom';
+  
+   var p = document.createElement('p');
+   p.className = 'dialogX-custom-content';
+   p.innerHTML = "Hello, i m <b>custom</b> <i>dialog box</i>.";
+
+   message.appendChild(p);
+
+   var button = document.createElement('button');
+   button.className = 'button button-2';
+   button.innerHTML = 'Okay';
+
+   message.appendChild(button);
+
+   var container = dialogX.decorator.container();
+   container.appendChild(message);
+   container = dialogX.decorator.draw(this, container);
+
+    button.addEventListener('click', function () {
+        document.getElementsByTagName('body')[0].removeChild(container);
+        container.outerHTML = '';
+        instance.enableScreen();
+   }, false);
+
+};
+</script>
+</body>
+</html>
