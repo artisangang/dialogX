@@ -88,8 +88,7 @@ dialogX.custom = function () {
    container = dialogX.decorator.draw(this, container);
 
     button.addEventListener('click', function () {
-        document.getElementsByTagName('body')[0].removeChild(container);
-        container.outerHTML = '';
+        instance.enableScreen(true, container);
         instance.enableScreen();
    }, false);
 

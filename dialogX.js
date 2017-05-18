@@ -97,14 +97,17 @@ function dialogX() {
 
 }
 
-dialogX.prototype.enableScreen = function (force) {
+dialogX.prototype.enableScreen = function (force, container) {
 
     var elements = document.getElementsByClassName('dialogX');
         
     if (!elements.length || (force && force == true)) {
-        var overlay = document.getElementById("dialogX-disabled-screen");
+
+        var overlay = container || document.getElementById("dialogX-disabled-screen");
+
          document.getElementsByTagName('body')[0].removeChild(overlay);
-         overlay.outerHTML = '';
+         
+         //overlay.outerHTML = '';
     }
 
 }
@@ -166,8 +169,7 @@ dialogX.prototype.alert = function (obj) {
    container = decorator.draw(this, container);
 
     button.addEventListener('click', function () {
-        document.getElementsByTagName('body')[0].removeChild(container);
-        container.outerHTML = '';
+        instance.enableScreen(true, container);
         instance.enableScreen();
    }, false);
 
@@ -214,8 +216,7 @@ dialogX.prototype.confirm = function (obj, callback) {
 
        button.addEventListener('click', function (e) {
 
-            document.getElementsByTagName('body')[0].removeChild(container);
-            container.outerHTML = '';
+            instance.enableScreen(true, container);            
             callback(parseInt(e.target.getAttribute('data-identity')));
             instance.enableScreen();
        }, false);
@@ -285,8 +286,7 @@ dialogX.prototype.password = function(config, callback) {
         callback({
             value: input.value, 
             close: function () {            
-                document.getElementsByTagName('body')[0].removeChild(container);
-                container.outerHTML = '';
+                instance.enableScreen(true, container);
                 instance.enableScreen();
             }, 
             malformed: function () { 
