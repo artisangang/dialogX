@@ -1,7 +1,7 @@
 /*
  * DialogX
  * @author: Harcharan Singh <artisangang@gmail.com>
- * @version 1.1
+ * @version 1.2
  * @git: https://github.com/artisangang/dialogX
  */
 (function(w) { 'use strict';
@@ -206,10 +206,17 @@ dialogX.prototype.confirm = function (obj, callback) {
     for (var i=0; i<defaultConfig.buttons; i++) {
        var button = document.createElement('button');
        button.innerHTML = defaultConfig.buttonText[i];
+
+       var btnCls = '';
+
+       if (defaultConfig.buttonClasses && defaultConfig.buttonClasses[i]) {
+            btnCls = defaultConfig.buttonClasses[i];
+       }
+
        if (i == 0) {
-            button.className = 'button button-1';
+            button.className = 'button button-1 ' + btnCls;
         } else {
-            button.className = 'button button-2 number-' + i;
+            button.className = 'button button-2 number-' + i + ' ' + btnCls;
         }
        button.setAttribute('data-identity', i);
        message.appendChild(button);
