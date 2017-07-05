@@ -1,7 +1,7 @@
 /*
  * DialogX
  * @author: Harcharan Singh <artisangang@gmail.com>
- * @version 1.0
+ * @version 1.1
  * @git: https://github.com/artisangang/dialogX
  */
 (function(w) { 'use strict';
@@ -272,6 +272,22 @@ dialogX.prototype.password = function(config, callback) {
     button.innerHTML = defaultConfig.buttonText;
 
     container.appendChild(button);
+
+    if (defaultConfig.cancelButtonText) {
+        var cancelButton = document.createElement('button');
+       cancelButton.className = 'button button-2 cancel-button';
+       cancelButton.innerHTML = defaultConfig.cancelButtonText;
+       cancelButton.addEventListener('click', function () {
+            instance.enableScreen(true, container);
+            instance.enableScreen();
+        }, false);
+
+       container.appendChild(cancelButton);
+    }
+
+  
+    
+
 
     var container = decorator.draw(this, container);    
     
